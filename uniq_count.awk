@@ -2,17 +2,12 @@
 # separated file
 #usage awk -f uniq_count.awk test.tsv
 BEGIN {
-    FS = "\t"
+    FS = "[ \t]+"
     count = 0
 }
 {
-    if ($1 in names)
-        names[$1] += 1
-    else
-        if ($1 != "")
-        {
-            names[$1] = 1 
-        }
+    if ( ($1 != "") && !($1 in names) )
+        names[$1] = 1 
 }
 END {
     for( name in names ) {
